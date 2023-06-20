@@ -10,6 +10,9 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded());
 app.use(expressLayouts);
 
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
 app.get('/',function(req,res){
     return res.render('home',{title:"Social Media Web App"});
 })
