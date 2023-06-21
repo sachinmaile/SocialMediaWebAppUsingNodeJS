@@ -8,11 +8,11 @@ module.exports.signIn=function(req,res){
     return res.render('user_sign_in',{title:'User SignIn'});
 }
 
-module.exports.create=function(req,res){
+module.exports.create=async (req,res)=>{
     if(req.body.password!=req.body.confirm_password){
         return res.redirect('back');
     }
-    User.findOne({email:req.body.email})
+    await User.findOne({email:req.body.email})
     .then((user)=>{
         if(!user){
             User.create(req.body)
@@ -34,26 +34,27 @@ module.exports.create=function(req,res){
     });
 }
 
-module.exports.createSession=async (req,res)=>{
-    await User.findOne({email:req.body.email})
-    .then((user)=>{
-        if(user){
-            if(user.password!=req.body.password){
-                return  res.redirect('back');
-            }
-            res.cookie('user_id',user.id);
-            return res.redirect('/users/profile');
-        }
-        else{
-            return res.redirect('back');
-        }
-    })
-    .catch((err)=>{
-        if(err){
-            console.log('Error in finding user in signing in');
-            return;
-        }
-    })
+module.exports.createSession=function (req,res){
+    // User.findOne({email:req.body.email})
+    // .then((user)=>{
+    //     if(user){
+    //         if(user.password!=req.body.password){
+    //             return  res.redirect('back');
+    //         }
+    //         res.cookie('user_id',user._id);
+    //         return res.redirect('/');
+    //     }
+    //     else{
+    //         return res.redirect('back');
+    //     }
+    // })
+    // .catch((err)=>{
+    //     if(err){
+    //         console.log('Error in finding user in signing in');
+    //         return;
+    //     }
+    // })
+    return res.redirect('/');
 }
 
 // module.exports.profile= function (req,res){
