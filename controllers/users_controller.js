@@ -83,4 +83,11 @@ module.exports.profile=async (req,res)=>{
             profile_user:user
         });
     });
-};
+}
+
+module.exports.destroySession=function(req,res){
+    req.logout(function(err){
+        if(err){ console.log('Error',err)}
+    });
+    return res.redirect('/');
+}

@@ -1,13 +1,14 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
+const app=express();
+const port=8000;
 const expressLayouts=require('express-ejs-layouts');
 const path=require('path');
-const port=8000;
 const db=require('./config/mongoose');
-const app=express();
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport_local_strategy');
+// const MongoStore=require('connect-mongo')(session);
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -25,7 +26,11 @@ app.use(session({
     secret:'blah',
     saveUninitialized:false,
     resave:false,
-    cookie:{maxAge:(1000*60*5)}
+    cookie:{maxAge:(1000*60*5)},
+    // store: MongoStore.create({
+    //     mongoUrl: 'mongodb://localhost:27017/social_media_web_app_db'
+    // })
+    // store:new MongoStore({mongooseConnection:db,autoRemove:'disabled'})
 }));
 
 app.use(passport.initialize());

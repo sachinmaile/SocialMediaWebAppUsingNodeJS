@@ -8,5 +8,6 @@ router.get('/signIn',userController.signIn);
 router.get('/profile',passport.checkAuthentication,userController.profile);
 router.post('/create',userController.create);
 router.post('/create_session',passport.authenticate('local',{failureRedirect:'/users/signIn'}),userController.createSession);
+router.get('/signOut',userController.destroySession);
 
 module.exports=router;
