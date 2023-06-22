@@ -1,4 +1,6 @@
 const Post=require('../models/post');
+const Comment=require('../models/comment');
+
 module.exports.create=async (req,res)=>{
     await Post.create({
         content: req.body.content,
@@ -9,4 +11,23 @@ module.exports.create=async (req,res)=>{
         console.log('Error in creating a post');
         return;
     });
+}
+
+module.exports.destroy=async (req,res)=>{
+    await Post.findById(req.params.id)
+    .then((post)=>{
+        if(post.user == req.user.id){
+            post.deleteOne({post:req.params.id})
+            .catch((err)=>{
+                return res.redirect('back');
+            });
+            Comment.deleteMany({post:req.params.id})
+            .catch((err)=>{
+                return res.redirect('back');
+            });
+        }
+        else{
+            return res.redirect('back');
+        }
+    })
 }
