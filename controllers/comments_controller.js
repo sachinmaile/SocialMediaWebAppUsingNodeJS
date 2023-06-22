@@ -15,3 +15,17 @@ module.exports.create=async (req,res)=>{
         })
     });
 }
+
+module.exports.destroy = async (req,res)=>{
+    await Comment.findById(req.params.id)
+    .then((comment)=>{
+        if(comment.user==req.user.id){
+            let postId=comment.post;
+            comment.deleteOne();
+            Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}})
+            .then(()=>{
+                return res.redirect('back');
+            });
+        }
+    });
+} 

@@ -17,10 +17,7 @@ module.exports.destroy=async (req,res)=>{
     await Post.findById(req.params.id)
     .then((post)=>{
         if(post.user == req.user.id){
-            post.deleteOne({post:req.params.id})
-            .catch((err)=>{
-                return res.redirect('back');
-            });
+            post.deleteOne()
             Comment.deleteMany({post:req.params.id})
             .catch((err)=>{
                 return res.redirect('back');
