@@ -3,7 +3,7 @@ const User=require('../models/user');
 module.exports.home=async (req,res)=>{
     try{
         // populate the user of each post
-       let posts = await Post.find({})
+       let posts = await Post.find({}).sort('-createdAt')
        .populate('user')
        .populate({
            path: 'comments',

@@ -13,7 +13,7 @@
                 <li>
                     <%= post.content %>
                     <%= post.user.name %>
-                    <a href="/posts/destroy/<%= post._id %>">Delete</a>
+                    <a class="delete-post-button" href="/posts/destroy/<%= post._id %>">Delete</a>
                     <div class="post-comments">
                         <% if(locals.user) { %>
                             <form action="/comments/create" method="POST">
@@ -48,3 +48,5 @@
         <p><a href="/users/profile/<%= u.id %>"><%= u.name %></a></p>
     <% } %>
 </section>
+
+<script src="/js/home_posts.js"></script>
