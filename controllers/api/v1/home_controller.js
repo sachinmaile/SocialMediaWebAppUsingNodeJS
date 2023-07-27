@@ -1,5 +1,5 @@
-const Post=require('../models/post');
-const User=require('../models/user');
+const Post=require('../../../models/post');
+const User=require('../../../models/user');
 module.exports.home=async (req,res)=>{
     try{
         // populate the user of each post
