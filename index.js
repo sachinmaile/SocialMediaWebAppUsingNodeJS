@@ -42,7 +42,7 @@ app.use(flash());
 app.use(customMWare.setFlash);
 
 // use express router
-app.use('/', require('./routes'));
+app.use('/', require('./routes/index'));
 
 app.listen(port,function(err){
     if(err){

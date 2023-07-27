@@ -1,5 +1,5 @@
-const Comment=require('../models/comment');
-const Post=require('../models/post');
+const Comment=require('../../../models/comment');
+const Post=require('../../../models/post');
 
 module.exports.create=async (req,res)=>{
     await Post.findById(req.body.post)
