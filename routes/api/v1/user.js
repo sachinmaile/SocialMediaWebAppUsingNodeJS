@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const userController=require('../controllers/users_controller');
+const userController=require('../../../controllers/api/v1/users_controller');
 const passport = require('passport');
 
 router.get('/signUp',userController.signUp);
