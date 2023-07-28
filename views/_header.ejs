@@ -1,18 +1,20 @@
 <header>
-    Page Header
-    <ul>
-        <% if(locals.user){ %>
-            <li><%= user.name %></li>
-            <li>
-                <a href="/api/v1/users/signOut">SignOut</a>
-            </li>
-        <% } else { %>
-            <li>
-                <a href="/api/v1/users/signIn">SignIn</a>
-            </li>
-            <li>
-                <a href="/api/v1/users/signUp">SignUp</a>
-            </li>
-        <% } %>
-    </ul>
+	<% if (locals.user) { %>
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/api/v1">SocialMediaWebApp</a>
+			<a class="navbar-brand" href="/api/v1">Welcome <%=locals.user.name%></a>
+			<form class="d-flex px-4">
+				<a class="navbar-brand p-2" href="/api/v1/users/signOut" style="background-color: red; border-radius: 5px">Sign out</a>
+			</form>
+		</div>
+	</nav>
+	<% } else { %>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/api/v1/users/signUp" style="background-color: green; border-radius: 5px">SignUp</a>
+                <a class="navbar-brand" href="/api/v1/users/signIn" style="background-color: blue; border-radius: 5px">SignIn</a>
+            </div>
+        </nav>
+    <% } %>
 </header>

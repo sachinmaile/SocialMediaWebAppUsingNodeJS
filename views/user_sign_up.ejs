@@ -1,8 +1,35 @@
-<h1>Sign Up</h1>
-<form action="/api/v1/users/create" method="POST">
-    <input type="text" name="name" placeholder="Your name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="password" name="confirm_password" placeholder="confirm_password" required>
-    <input type="submit" value="SignUp">
-</form>
+<div class="w-50 mx-auto mt-5" style="display: grid; place-content: center; width: 530px; background: white;
+    border-radius: 5px;
+    box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);"
+>
+    <div class="mx-auto mt-3 mb-4" style="width: 100px">
+        <h4>Sign Up</h4>
+    </div>
+    <form action="/api/v1/users/create" method="post" >
+        <div class="mb3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="abc@email.com" name="email" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required />
+        </div>
+        <div class="mb-4 mt-3" style="display: flex; justify-content: center">
+            <button type="submit" class="btn btn-success btn-block mb-4">Sign Up</button>
+        </div>
+    </form>
+    <div class="mx-auto mb-3 mt-3" style="width: 300px">
+        <a href="/api/v1/users/signIn" style="margin-left: 100px">Log in Instead</a>
+    </div>
+</div>
