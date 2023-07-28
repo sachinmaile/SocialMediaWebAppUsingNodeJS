@@ -11,7 +11,7 @@ module.exports.create=async (req,res)=>{
         }).then((comment)=>{
             post.comments.push(comment);
             post.save();
-            res.redirect('/');
+            res.redirect('/api/v1');
         })
     });
 }
@@ -24,7 +24,7 @@ module.exports.destroy = async (req,res)=>{
             comment.deleteOne();
             Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}})
             .then(()=>{
-                return res.redirect('back');
+                return res.redirect('/api/v1');
             });
         }
     });

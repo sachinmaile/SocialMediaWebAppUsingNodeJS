@@ -1,7 +1,7 @@
 const User=require('../../../models/user');
 
 module.exports.signUp=function(req,res){
-    if(req.isAuthenticated()) return res.redirect('users/profile');
+    if(req.isAuthenticated()) return res.redirect('/api/v1/users/profile');
     return res.render('user_sign_up',{title:'User SignUp'});
 }
 
@@ -18,7 +18,7 @@ module.exports.create=async (req,res)=>{
         if(!user){
             User.create(req.body)
             .then((user)=>{
-                return res.redirect('/users/signIn');
+                return res.redirect('/api/v1/users/signIn');
             })
             .catch((err)=>{
                 console.log('Error in creating user while signing up');
@@ -56,7 +56,7 @@ module.exports.createSession=function (req,res){
     //     }
     // })
     req.flash('success','Logged in Successfully');
-    return res.redirect('/');
+    return res.redirect('/api/v1/');
 }
 
 // module.exports.profile= function (req,res){
@@ -119,5 +119,5 @@ module.exports.destroySession=function(req,res){
         if(err){ console.log('Error',err)}
     });
     req.flash('success','Logged out Successfully');
-    return res.redirect('/');
+    return res.redirect('/api/v1/');
 }

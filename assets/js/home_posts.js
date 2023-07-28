@@ -5,7 +5,7 @@
             e.preventDefault();
             $.ajax({
                 type:'post',
-                url:'/posts/create',
+                url:'/api/v1/posts/create',
                 data:newPostForm.serialize(),
                 success:function(data){
                     let newPost=newPostDom(data.data.post);
