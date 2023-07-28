@@ -1,52 +1,59 @@
-<h1><%= title%></h1>
-<section id="feed-posts">
-    <h4>Posts</h4>
-    <% if(locals.user) { %>
-        <form action="/api/v1/posts/create" id="new-post-form" method="POST">
-            <textarea name="content" cols="30" rows="3"></textarea>
-            <input type="submit" value="Post">
-        </form>
-    <% } %>
-    <div id="posts-list-container">
-        <ul>
-            <% for(post of posts) { %>
-                <li>
-                    <%= post.content %>
-                    <%= post.user.name %>
-                    <a class="delete-post-button" href="/api/v1/posts/destroy/<%= post._id %>">Delete</a>
-                    <div class="post-comments">
-                        <% if(locals.user) { %>
-                            <form action="/api/v1/comments/create" method="POST">
-                                <input type="text" name="content" placeholder="Type Here">
-                                <input type="hidden" name="post" value="<%= post._id %>">
-                                <input type="submit" value="Add Comment">
-                            </form>
-                        <% } %>
-                    </div>
-                    <div class="post-comments-list">
-                        <ul id="post-comments-<%= post._id %>">
-                            <% for(comment of post.comments){ %>
-                                <p>
-                                    <%= comment.content %><br>
-                                    <small><%= comment.user.name %></small>
-                                </p>
-                                <% if(locals.user && locals.user.id==comment.user.id) { %>
-                                    <small><a href="/api/v1/comments/destroy/<%= comment.id %>">DEL</a></small>
-                                <% } %>
+<div class="hstack gap-3 mx-auto" style="left: 20%;">
+    <div class="p-2">
+        <section id="feed-posts">
+            <h4>Posts</h4>
+            <!-- <% if(locals.user) { %>
+                <form action="/api/v1/posts/create" id="new-post-form" method="POST">
+                    <textarea name="content" cols="30" rows="3"></textarea>
+                    <input type="submit" value="Post">
+                </form>
+            <% } %> -->
+            <div id="posts-list-container">
+                <ul>
+                    <% for(post of posts) { %>
+                        <li>
+                            <%= post.content %>
+                            <%= post.user.name %>
+                            <% if(locals.user.id==post.user.id) { %>
+                                <a class="delete-post-button" href="/api/v1/posts/destroy/<%= post._id %>">Delete</a>
                             <% } %>
-                        </ul>
-                    </div>
-                </li>
-            <% } %>
-        </ul>
+                            <div class="post-comments">
+                                <% if(locals.user) { %>
+                                    <form action="/api/v1/comments/create" method="POST">
+                                        <input type="text" name="content" placeholder="Type Here">
+                                        <input type="hidden" name="post" value="<%= post._id %>">
+                                        <input type="submit" value="Add Comment">
+                                    </form>
+                                <% } %>
+                            </div>
+                            <div class="post-comments-list">
+                                <ul id="post-comments-<%= post._id %>">
+                                    <% for(comment of post.comments){ %>
+                                        <p>
+                                            <%= comment.content %><br>
+                                            <small><%= comment.user.name %></small>
+                                        </p>
+                                        <% if(locals.user && locals.user.id==comment.user.id) { %>
+                                            <small><a href="/api/v1/comments/destroy/<%= comment.id %>">DEL</a></small>
+                                        <% } %>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </section>        
     </div>
-</section>
-
-<section id="user-friends">
-    <h4>Friends</h4>
-    <% for(u of all_users) { %>
-        <p><a href="/api/v1/users/profile/<%= u.id %>"><%= u.name %></a></p>
-    <% } %>
-</section>
+    <div class="vr"></div>
+    <div class="p-2">
+        <section id="user-friends">
+            <h4>Friends</h4>
+            <% for(u of all_users) { %>
+                <p><a href="/api/v1/users/profile/<%= u.id %>"><%= u.name %></a></p>
+            <% } %>
+        </section>
+    </div>
+</div>
 
 <script src="/js/home_posts.js"></script>

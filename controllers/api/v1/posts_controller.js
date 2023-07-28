@@ -1,11 +1,16 @@
 const Post=require('../../../models/post');
 const Comment=require('../../../models/comment');
 
+module.exports.createPost=function(req,res){
+    return res.render('create_post',{title:'Create Post'});
+}
+
 module.exports.create=async (req,res)=>{
     await Post.create({
         content: req.body.content,
         user:req.user._id
     }).then(()=>{
+        req.flash('success','Post created Successfully');
         return res.redirect('back');
     }).catch((err)=>{
         console.log('Error in creating a post');
