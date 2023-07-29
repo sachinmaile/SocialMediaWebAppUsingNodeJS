@@ -1,22 +1,23 @@
-<div class="hstack gap-3 mx-auto" style="left: 20%;">
-    <div class="p-2">
-        <section id="feed-posts">
-            <h4>Posts</h4>
-            <!-- <% if(locals.user) { %>
-                <form action="/api/v1/posts/create" id="new-post-form" method="POST">
-                    <textarea name="content" cols="30" rows="3"></textarea>
-                    <input type="submit" value="Post">
-                </form>
-            <% } %> -->
-            <div id="posts-list-container">
-                <ul>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        
+        <div class="col">
+            <section id="feed-posts">
+                <h4 class="text-center">Posts</h4>
+                <div class="row row-cols-1 row-cols-md-1 g-1">
                     <% for(post of posts) { %>
-                        <li>
-                            <%= post.content %>
-                            <%= post.user.name %>
-                            <% if(locals.user.id==post.user.id) { %>
-                                <a class="delete-post-button" href="/api/v1/posts/destroy/<%= post._id %>">Delete</a>
-                            <% } %>
+                        <div class="col">
+                        <div class="card">
+                        <div class="card-body">
+                            <p class="card-text" style="font-family: 'Edu SA Beginner', cursive;">
+                                <%= post.user.name %>
+                            </p><hr>
+                            <h5 class="card-title" style="font-family: 'Lobster', cursive;"><%= post.content %></h5>
+                            <p class="card-text">
+                                <% if(locals.user.id==post.user.id) { %>
+                                    <a class="delete-post-button" href="/api/v1/posts/destroy/<%= post._id %>">Delete</a>
+                                <% } %>
                             <div class="post-comments">
                                 <% if(locals.user) { %>
                                     <form action="/api/v1/comments/create" method="POST">
@@ -29,31 +30,32 @@
                             <div class="post-comments-list">
                                 <ul id="post-comments-<%= post._id %>">
                                     <% for(comment of post.comments){ %>
-                                        <p>
-                                            <%= comment.content %><br>
-                                            <small><%= comment.user.name %></small>
+                                        <p style="display: inline;">
+                                            <%= comment.content %> &nbsp;
+                                            <small style="font-family: 'Edu SA Beginner', cursive;"><%= comment.user.name %></small>
                                         </p>
                                         <% if(locals.user && locals.user.id==comment.user.id) { %>
                                             <small><a href="/api/v1/comments/destroy/<%= comment.id %>">DEL</a></small>
                                         <% } %>
                                     <% } %>
                                 </ul>
-                            </div>
-                        </li>
+                            </div></p>
+                        </div>
+                        </div>
+                    </div>
                     <% } %>
-                </ul>
-            </div>
-        </section>        
-    </div>
-    <div class="vr"></div>
-    <div class="p-2">
-        <section id="user-friends">
-            <h4>Friends</h4>
-            <% for(u of all_users) { %>
-                <p><a href="/api/v1/users/profile/<%= u.id %>"><%= u.name %></a></p>
-            <% } %>
-        </section>
+                    </div>
+            </section> 
+        </div>
+           
+        <div class="col">
+            <section id="user-friends">
+                <h4>Friends</h4>
+                <% for(u of all_users) { %>
+                    <p><a href="/api/v1/users/profile/<%= u.id %>"><%= u.name %></a></p>
+                <% } %>
+            </section>
+        </div>
     </div>
 </div>
-
 <script src="/js/home_posts.js"></script>

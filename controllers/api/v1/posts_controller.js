@@ -9,9 +9,9 @@ module.exports.create=async (req,res)=>{
     await Post.create({
         content: req.body.content,
         user:req.user._id
-    }).then(()=>{
+    }).then((req,res)=>{
         req.flash('success','Post created Successfully');
-        return res.redirect('back');
+        return res.redirect('/api/v1');
     }).catch((err)=>{
         console.log('Error in creating a post');
         return;

@@ -1,5 +1,5 @@
 <header>
-	<% if (locals.user) { %>
+	<!-- <% if (locals.user) { %>
 	<nav class="navbar navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/api/v1">SocialMediaWebApp</a>
@@ -17,5 +17,44 @@
                 <a class="navbar-brand" href="/api/v1/users/signIn" style="background-color: blue; border-radius: 5px">SignIn</a>
             </div>
         </nav>
-    <% } %>
+    <% } %> -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Borel&family=Poppins:wght@200&family=Roboto+Mono&display=swap" rel="stylesheet">
+	<% if (locals.user) { %>
+		<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+			<div class="position-sticky">
+				<a class="list-group-item list-group-item-action py-2 ripple text-center" aria-current="true" href="/api/v1" style="font-family: 'Borel', cursive; font-weight: bold; font-size:larger;">
+					SocialMediaWebApp
+				</a>
+			<div class="list-group list-group-flush mx-3 mt-4">
+				<a class="list-group-item list-group-item-action py-2 ripple active" href="/api/v1">
+					Welcome <%=locals.user.name%>
+				</a>
+				<a href="/api/v1/posts/createPost" class="list-group-item list-group-item-action py-2 ripple">
+					Create Post
+				</a>
+				<a href="/api/v1/users/signOut" class="list-group-item list-group-item-action py-2 ripple">
+					SignOut
+				</a>
+			</div>
+			</div>
+		</nav>
+	<% } else { %>
+		<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+			<div class="position-sticky">
+				<a class="list-group-item list-group-item-action py-2 ripple text-center" aria-current="true" href="/api/v1" style="font-family: 'Borel', cursive; font-weight: bold; font-size:larger;">
+					SocialMediaWebApp
+				</a>
+			<div class="list-group list-group-flush mx-3 mt-4">
+				<a href="/api/v1/users/signUp" class="list-group-item list-group-item-action py-2 ripple">
+					SignUp
+				</a>
+				<a href="/api/v1/users/signIn" class="list-group-item list-group-item-action py-2 ripple">
+					SignIn
+				</a>
+			</div>
+			</div>
+		</nav>
+	<% } %>
 </header>
